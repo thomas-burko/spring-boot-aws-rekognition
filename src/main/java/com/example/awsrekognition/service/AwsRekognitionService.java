@@ -20,10 +20,8 @@ public class AwsRekognitionService {
     }
 
     public DetectModerationLabelsResult detectModerationLabels(MultipartFile imageToCheck) throws IOException {
-        Image imageToUpload = new Image();
-        imageToUpload.withBytes(ByteBuffer.wrap(imageToCheck.getBytes()));
-        DetectModerationLabelsRequest request = new DetectModerationLabelsRequest();
-        request.withImage(imageToUpload);
+        DetectModerationLabelsRequest request = new DetectModerationLabelsRequest()
+                .withImage(new Image().withBytes(ByteBuffer.wrap(imageToCheck.getBytes())));
 
         return client.detectModerationLabels(request);
     }
